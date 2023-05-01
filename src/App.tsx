@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import axios from "axios";
+import { response } from 'express';
+import { useEffect, useState } from 'react';
+
+interface Card {
+  id:string;
+  name:string;
+  imageUrl:string;
+}
+
+
+
+
 
 function App() {
+
+  const [cards, setCards] = useState<Card[]>([]);
+  const cardName:string = "Lightning Bolt";
+  useEffect(() => {
+    
+    axios.get(`https://api.magicthegathering.io/v1/cards?name=${cardName}`)
+    .then(response => {
+      setCards(response.data.cards);
+    })
+    .catch(error => {
+      console.log(`ERROR IS ${error}`)
+    })
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {cards? cards.map((card) => ( card.imageUrl? 
+        <img key={card.id} src={card.imageUrl} alt={card.name} /> : null
+      )): "horses"}
+      <p>hey there</p>
+      <img src="" alt="" />
     </div>
   );
 }
