@@ -39,15 +39,19 @@ function App() {
 
   useEffect(() => {
     getAllSets()
-    .then((data) => setSets(data))
+    .then((data) => {setSets(data) 
+      console.log("datais", data.data)
+      console.log(`sets arr:`, sets.data)})
+    
     .catch((error) => console.log(`ERROR is ${error}`));
   }, [])
-  
+
   return (
     <div className="App">
-      {/* {cards.data? cards.data.map((card) => ( card.image_uris? 
-        <img key={card.id} src={card.image_uris} alt={card.name} /> : null
-      )): "horses"} */}
+      {sets.data? sets.data.map((set) => ( set.icon_svg_uri? 
+        <img key={set.id} src={set.icon_svg_uri} alt={set.name} />
+         : null
+      )): "horses"}
       <p>hey there</p>
       <img src="" alt="" />
     </div>
