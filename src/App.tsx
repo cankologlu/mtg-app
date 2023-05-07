@@ -1,34 +1,33 @@
 import './App.css';
 import axios from "axios";
-import { response } from 'express';
+import getAllSets from "./helpers/getAllSets"
 import { useEffect, useState } from 'react';
 
-interface Data {
-    "object": string;
-      "id": string;
-      "code": string;
-      "mtgo_code": string;
-      "arena_code": string;
-      "tcgplayer_id": number;
-      "name": string;
-      "uri": string;
-      "scryfall_uri": string;
-      "search_uri": string;
-      "released_at": string;
-      "set_type": string;
-      "card_count": number;
-      "digital": boolean;
-      "nonfoil_only": boolean
-      "foil_only": boolean
-      "icon_svg_uri": "https://svgs.scryfall.io/sets/cmm.svg?1682913600"
+type CardSet = {
+  card_count: number;
+  code: string;
+  digital: boolean;
+  foil_only: boolean;
+  icon_svg_uri: string;
+  id: string;
+  name: string;
+  nonfoil_only: boolean;
+  object: 'set';
+  released_at: string;
+  scryfall_uri: string;
+  search_uri: string;
+  set_type: string;
+  tcgplayer_id: number;
+  uri: string;
+};
+
+type AllSets = {
+  object:string;
+  has_more:boolean;
+  data: CardSet[];
 }
 
-interface Card {
-  id:string;
-  name:string;
-  image_uris:string;
-  data:Data[];
-}
+
 
 
 
@@ -36,24 +35,14 @@ interface Card {
 
 function App() {
 
-  const [cards, setCards] = useState<Card[]>([]);
-  const cardName:string = "Lightning Bolt";
+  const [sets, setSets] = useState<AllSets>({ object: '', has_more: false, data: [] })
+
   useEffect(() => {
-    
-    axios.get(`https://api.scryfall.com/sets`)
-    .then(response => {
-      setCards(response.data.data);
-      console.log(response.data)
-      console.log(response.data.data)
-      // console.log(cards)
-    })
-    .catch(error => {
-      console.log(`ERROR IS ${error}`)
-    })
+    getAllSets()
+    .then((data) => setSets(data))
+    .catch((error) => console.log(`ERROR is ${error}`));
   }, [])
-
- 
-
+  
   return (
     <div className="App">
       {/* {cards.data? cards.data.map((card) => ( card.image_uris? 
