@@ -39,18 +39,23 @@ function App() {
 
   useEffect(() => {
     getAllSets()
-    .then((data) => {setSets(data) 
-      console.log("datais", data.data)
-      console.log(`sets arr:`, sets.data)})
-    
+    .then((data) => {setSets(data)})   
     .catch((error) => console.log(`ERROR is ${error}`));
   }, [])
+  console.log("seeking set type",sets.data[0],"alo")
 
   return (
     <div className="App">
-      {sets.data? sets.data.map((set) => ( set.icon_svg_uri? 
-        <img key={set.id} src={set.icon_svg_uri} alt={set.name} />
-         : null
+      {sets.data? sets.data.map((set) => ( <h1>------{set.set_type}---------</h1>? 
+        <>
+        <h1>------{set.set_type}---------</h1>  
+        <p>{set.name}</p>
+        <img key={set.id} src={set.icon_svg_uri} alt={set.name} width="50" height="50" />       
+        </>
+         :<>
+          
+         <p>{set.name}</p>
+         <img key={set.id} src={set.icon_svg_uri} alt={set.name} width="50" height="50"/></>
       )): "horses"}
       <p>hey there</p>
       <img src="" alt="" />
