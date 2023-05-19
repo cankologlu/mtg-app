@@ -39,17 +39,3 @@ export default function getAllSets(): Promise<AllSets> {
 
 }
 
-// useEffect(() => {
-  
-//   axios.get()
-//   .then(response => {
-//     setCards(response.data.data);
-//     console.log(response.data)
-//     console.log(response.data.data)
-//     // console.log(cards)
-//   })
-//   .catch(error => {
-//     console.log(`ERROR IS ${error}`)
-//   })
-// }, [])
-

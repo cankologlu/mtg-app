@@ -1,35 +1,7 @@
 import './App.css';
-import axios from "axios";
-import getAllSets from "./helpers/getAllSets"
+import getAllSets from './helpers/getAllSets'
 import { useEffect, useState } from 'react';
-
-type CardSet = {
-  card_count: number;
-  code: string;
-  digital: boolean;
-  foil_only: boolean;
-  icon_svg_uri: string;
-  id: string;
-  name: string;
-  nonfoil_only: boolean;
-  object: 'set';
-  released_at: string;
-  scryfall_uri: string;
-  search_uri: string;
-  set_type: string;
-  tcgplayer_id: number;
-  uri: string;
-};
-
-type AllSets = {
-  object:string;
-  has_more:boolean;
-  data: CardSet[];
-}
-
-
-
-
+import { AllSets } from './types/Cardset'
 
 
 
@@ -39,7 +11,20 @@ function App() {
 
   useEffect(() => {
     getAllSets()
-    .then((data) => {setSets(data)})   
+    .then((data) => {
+      // Group the sets data by set_type
+      const groupedSets = data.data.reduce((acc, set) => {
+        const set_type = set.set_type;
+        if (acc[set_type]) {
+          acc[set_type].push(set);
+        } else {
+          acc[set_type] = [set];
+        }
+        return acc;
+      }, {});
+      // Update the state with the grouped sets data
+      setSets({ object: data.object, has_more: data.has_more, data: groupedSets });
+    })   
     .catch((error) => console.log(`ERROR is ${error}`));
   }, [])
   console.log("seeking set type",sets.data[0],"alo")
