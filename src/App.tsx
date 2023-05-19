@@ -1,19 +1,23 @@
 import './App.css';
 import getAllSets from './helpers/getAllSets'
 import { useEffect, useState } from 'react';
-import { AllSets } from './types/Cardset'
+import { CardSet } from './types/Cardset'
 
 
 
 function App() {
 
-  const [sets, setSets] = useState<AllSets>({ object: '', has_more: false, data: [] })
+  const [sets, setSets] = useState<{ object: string, has_more: boolean, data: { [key: string]: CardSet[] } }>({
+    object: '',
+    has_more: false,
+    data: {}
+  });
 
   useEffect(() => {
     getAllSets()
     .then((data) => {
       // Group the sets data by set_type
-      const groupedSets = data.data.reduce((acc, set) => {
+      const groupedSets = data.data.reduce((acc: { [key: string]: CardSet[] }, set: CardSet) => {
         const set_type = set.set_type;
         if (acc[set_type]) {
           acc[set_type].push(set);
@@ -27,23 +31,25 @@ function App() {
     })   
     .catch((error) => console.log(`ERROR is ${error}`));
   }, [])
-  console.log("seeking set type",sets.data[0],"alo")
+  console.log("sets are:", sets)
+  console.log("data is ", sets.data)
 
   return (
     <div className="App">
-      {sets.data? sets.data.map((set) => ( <h1>------{set.set_type}---------</h1>? 
-        <>
-        <h1>------{set.set_type}---------</h1>  
-        <p>{set.name}</p>
-        <img key={set.id} src={set.icon_svg_uri} alt={set.name} width="50" height="50" />       
-        </>
-         :<>
-          
-         <p>{set.name}</p>
-         <img key={set.id} src={set.icon_svg_uri} alt={set.name} width="50" height="50"/></>
-      )): "horses"}
+     {Object.entries(sets.data).map(([set_type, sets]) => (
+        <div key={set_type}>
+          <h1>------{set_type}---------</h1>
+          {sets.map((set: CardSet) => (
+            <div key={set.id}>
+              <p>{set.name}</p>
+              <img src={set.icon_svg_uri} alt={set.name} width="50" height="50" />
+            </div>
+          ))}
+        </div>
+      ))}
       <p>hey there</p>
-      <img src="" alt="" />
+
+
     </div>
   );
 }
