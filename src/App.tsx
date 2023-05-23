@@ -2,6 +2,7 @@ import './App.css';
 import getAllSets from './helpers/getAllSets'
 import { useEffect, useState } from 'react';
 import { CardSet } from './types/Cardset'
+import { createBrowserRouter, Route, Link, Routes } from "react-router-dom";
 
 
 
@@ -31,8 +32,6 @@ function App() {
     })   
     .catch((error) => console.log(`ERROR is ${error}`));
   }, [])
-  console.log("sets are:", sets)
-  console.log("data is ", sets.data)
 
   return (
     <div className="App">
