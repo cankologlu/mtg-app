@@ -1,21 +1,18 @@
 import './App.css';
-import {  Route, Link, Routes,BrowserRouter } from "react-router-dom";
+import {  Route, Link, Routes,BrowserRouter, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react"
 import RootLayout from "./layouts/RootLayout"
 
-
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route path="/" element={<RootLayout />}>
+    <Route path="about" element={<div>about here</div>} />
+  </Route>
+))
 
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<RootLayout />}>
-          <Route path="about" element={<div>about here</div>} />
-        </Route> 
-      </Routes>
-    
-    </BrowserRouter>
+    <RouterProvider router={router} />
   );
 }
 
