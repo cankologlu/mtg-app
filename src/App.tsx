@@ -1,6 +1,7 @@
 import './App.css';
 import {  Route, Link, Routes,BrowserRouter, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react"
+import { Theme } from '@chakra-ui/react';
+
 import RootLayout from "./layouts/RootLayout"
 
 const router = createBrowserRouter(createRoutesFromElements(
