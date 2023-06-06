@@ -15,6 +15,8 @@ import {
   MenuOptionGroup,
   MenuDivider,
 } from "@chakra-ui/react";
+import { ChevronDownIcon } from '@chakra-ui/icons'
+
 
 export default function RootLayout() {
   const [sets, setSets] = useState<{
@@ -62,34 +64,35 @@ export default function RootLayout() {
         minHeight="100vh"
         p="20px"
       >
-        <Box
-          bg="tomato"
-          css={{
-            "&::-webkit-scrollbar": {
-              width: "4px",
-            },
-            "&::-webkit-scrollbar-track": {
-              width: "6px",
-            },
-            "&::-webkit-scrollbar-thumb": {
-              background: "#8ccef0",
-              borderRadius: "24px",
-            },
-          }}
-          overflowX="auto"
-          maxHeight="200px"
-        >
-            <Menu isOpen={true}>
+          <>SETS</>
+            <Menu isOpen={true} >
+              <Box
+              className="horse"
+                bg=""
+                css={{
+                  "&::-webkit-scrollbar": {
+                    width: "4px",
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    width: "6px",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    background: "#8ccef0",
+                    borderRadius: "24px",
+                  },
+                }}
+                overflowX="auto"
+                maxHeight="600px"
+              >
           {Object.entries(sets.data).map(([set_type, sets]) => (
-              <MenuList>
-                {/* <MenuButton as={Button} key={set_type} rightIcon={<ChevronDownIcon /> } w="200px">
-            {set_type}
-            </MenuButton> */}
-                {sets.map((set: CardSet) => (
+            <MenuList key={`panda${Math.random()*10}`} justifyContent={"center"}>
+                <MenuButton as={Button} key={set_type} w="200px" >
+            { set_type !== "vanguard" && set_type}
+            </MenuButton>
+                {set_type !== "vanguard" && sets.map((set: CardSet) => (
                   <MenuItem
                     key={set.id}
                     maxW="120px"
-                    as={Link}
                     fontSize={"x-small"}
                   >
                     <Image
@@ -101,11 +104,11 @@ export default function RootLayout() {
                     />
                     {set.name}
                   </MenuItem>
-                ))}
+                  ))}
               </MenuList>
           ))}
+          </Box>
             </Menu>
-        </Box>
       </GridItem>
       <GridItem as="main" colSpan={5}>
         <Navbar />
