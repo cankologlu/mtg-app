@@ -5,17 +5,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import getAllSets from "../helpers/getAllSets";
 import { CardSet } from "../types/Cardset";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-} from "@chakra-ui/react";
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import SetsMenu from "../components/SetsMenu"
 
 
 export default function RootLayout() {
@@ -51,10 +41,10 @@ export default function RootLayout() {
           has_more: data.has_more,
           data: groupedSets,
         });
+        
       })
       .catch((error) => console.log(`ERROR is ${error}`));
   }, []);
-
   return (
     <Grid templateColumns="repeat(6, 1fr)">
       <GridItem
@@ -64,51 +54,7 @@ export default function RootLayout() {
         minHeight="100vh"
         p="20px"
       >
-          <>SETS</>
-            <Menu isOpen={true} >
-              <Box
-              className="horse"
-                bg=""
-                css={{
-                  "&::-webkit-scrollbar": {
-                    width: "4px",
-                  },
-                  "&::-webkit-scrollbar-track": {
-                    width: "6px",
-                  },
-                  "&::-webkit-scrollbar-thumb": {
-                    background: "#8ccef0",
-                    borderRadius: "24px",
-                  },
-                }}
-                overflowX="auto"
-                maxHeight="600px"
-              >
-          {Object.entries(sets.data).map(([set_type, sets]) => (
-            <MenuList key={`panda${Math.random()*10}`} justifyContent={"center"}>
-                <MenuButton as={Button} key={set_type} w="200px" >
-            { set_type !== "vanguard" && set_type}
-            </MenuButton>
-                {set_type !== "vanguard" && sets.map((set: CardSet) => (
-                  <MenuItem
-                    key={set.id}
-                    maxW="120px"
-                    fontSize={"x-small"}
-                  >
-                    <Image
-                      src={set.icon_svg_uri}
-                      alt={set.name}
-                      boxSize="2rem"
-                      borderRadius="full"
-                      mr="12px"
-                    />
-                    {set.name}
-                  </MenuItem>
-                  ))}
-              </MenuList>
-          ))}
-          </Box>
-            </Menu>
+        <SetsMenu sets = {sets} />
       </GridItem>
       <GridItem as="main" colSpan={5}>
         <Navbar />
