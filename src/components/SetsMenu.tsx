@@ -15,6 +15,7 @@ import {
 import { Box, Button, Grid, GridItem, Image, Link } from "@chakra-ui/react";
 import { CardSet } from "../types/Cardset";
 import { NavLink } from "react-router-dom";
+import { useInView } from "framer-motion";
 
 type SetsMenuProps = {
   sets: {
@@ -26,7 +27,7 @@ type SetsMenuProps = {
 
 export default function SetsMenu (props: SetsMenuProps ) {
   const { sets } = props 
- 
+ console.log('sets are;', sets);
   return (
 
     <Box position={"relative"}
@@ -49,8 +50,8 @@ export default function SetsMenu (props: SetsMenuProps ) {
     >
         <List>
   {Object.entries(sets.data).map(([set_type, sets]) => (
-   <Box as={Heading} key={set_type} w="200px" fontSize="h4" p={4} >
-    {set_type}
+   <Box as={Heading} key={set_type} w="200px" fontSize="small" p={4} >
+    {set_type.replace("_", " ")}
         {sets.map((set: CardSet) => (
           <ListItem 
           position={"relative"}
@@ -60,7 +61,8 @@ export default function SetsMenu (props: SetsMenuProps ) {
           transform={"none"}
           ><NavLink to={`/sets/${set.code}`}>
             {set.name}
-            <Image
+             <Image
+              fallbackSrc="https://www.seekpng.com/png/full/24-240917_unicorn-unicorns-emoji-emoji-horse-freetoedit-unicorn-emoji.png"
               src={set.icon_svg_uri}
               alt={set.name}
               boxSize="2rem"
