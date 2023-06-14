@@ -28,7 +28,6 @@ type AllSets = {
 export default function getAllSets(): Promise<AllSets> {
   return axios.get(`https://api.scryfall.com/sets`)
   .then(response => {
-    console.log(response.data)
     return response.data as AllSets;
   })
   .catch(error => {

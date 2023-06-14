@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { Box, Button, Grid, GridItem, Image, Link } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Grid, GridItem, Heading, Image, Link } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import React from "react";
 import getAllSets from "../helpers/getAllSets";
@@ -49,14 +49,17 @@ export default function RootLayout() {
     <Grid templateColumns="repeat(6, 1fr)">
       <GridItem
         as="aside"
-        colSpan={1}
+        colSpan={{base: 6, lg: 1, xl: 1}}
         bg="blackAlpha.200"
-        minHeight="100vh"
-        p="20px"
+        minHeight={{base:"25vh", lg: "100vh"}}
+        paddingBottom={{base: "20px", lg: "30px"}}
+        paddingLeft={{base: "20px", lg: "30px"}}
+        paddingRight={{base: "20px", lg: "30px"}}
       >
+      <Flex as="nav" mb={"10px"} alignContent={"center"}><Heading paddingTop={"10px"}>Sets here</Heading></Flex>
         <SetsMenu sets = {sets} />
       </GridItem>
-      <GridItem as="main" colSpan={5}>
+      <GridItem as="main" colSpan={{base: 6, lg: 5, xl: 5}}>
         <Navbar />
         <Outlet />
       </GridItem>
