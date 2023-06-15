@@ -10,7 +10,7 @@ export default function Sets() {
   return (
     <SimpleGrid p="10px" minChildWidth="250px" spacing="10px">
       {setsData.data.map((card: any) => (
-        <Image key={card.id} 
+        card.image_uris.normal && <Image key={card.id} 
         src={card.image_uris.normal} 
         alt={card.name} />
       ))}
