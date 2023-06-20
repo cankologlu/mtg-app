@@ -10,7 +10,7 @@ export type CardSet = {
   object: 'set';
   released_at: string;
   scryfall_uri: string;
-  search_uri: string;
+  search_uri: string;,
   set_type: string;
   tcgplayer_id: number;
   uri: string;
