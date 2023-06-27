@@ -1,7 +1,7 @@
 import { SimpleGrid } from "@chakra-ui/layout";
 import axios from "axios";
 import React from "react";
-import { LoaderFunction, useLoaderData } from "react-router";
+import { LoaderFunction, useLoaderData, Params } from "react-router";
 import { Image } from "@chakra-ui/react";
 
 export default function Sets() {
@@ -18,10 +18,11 @@ export default function Sets() {
   );
 }
 
-export async function setsLoader({ params }: { params: { setsId: string } }) {
+export const setsLoader: LoaderFunction = async({ params }: Params<string> ): Promise<any> => {
+  const { setsId }:string | any = params
   return axios
     .get(
-      `https://api.scryfall.com/cards/search?include_extras=true&include_variations=true&order=set&q=e%3A${params.setsId}&unique=prints`
+      `https://api.scryfall.com/cards/search?include_extras=true&include_variations=true&order=set&q=e%3A${setsId}&unique=prints`
     )
     .then((response) => {
       console.log("response data is:", response.data);
