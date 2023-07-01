@@ -10,26 +10,32 @@ export default function Sets() {
   console.log("setsData is:", setsData);
   return (
     <SimpleGrid p="10px" minChildWidth="250px" spacing="10px">
-      {setsData.data.map((card: Card) =>
-        card.layout === "transform" ||
-        "modal_dfc" ||
-        "meld" ||
-        "double_faced_token" ||
-        "reversible_card" ? (
+      {setsData.data.map((card: Card) =>{
+        const isDoubleFacedCard =
+          card.layout === "transform" ||
+          card.layout === "modal_dfc" ||
+          card.layout === "meld" ||
+          card.layout === "double_faced_token" ||
+          card.layout === "reversible_card";
+
+        const imageUrl = isDoubleFacedCard
+          ? card.card_faces?.[0]?.image_uris?.normal
+          : card.image_uris?.normal;
+
+        if (!imageUrl) {
+          // If imageUrl is null or undefined, skip rendering the Image component
+          return null;
+        }
+
+        return (
           <Image
             borderRadius="1"
             key={card.id}
-            src={card.card_faces?.[0].image_uris.normal}
+            src={imageUrl}
             alt={card.name}
           />
-        ) : (
-          <Image
-            borderRadius="1"
-            key={card.id}
-            src={card.image_uris.normal}
-            alt={card.name}
-          />
-        )
+        );
+      }
       )}
     </SimpleGrid>
   );
