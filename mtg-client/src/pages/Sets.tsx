@@ -11,8 +11,11 @@ export default function Sets() {
   return (
     <SimpleGrid p="10px" minChildWidth="250px" spacing="10px">
       {setsData.data.map((card: Card) => (
-        card.image_uris && card.image_uris.normal && <Image borderRadius={"1"} key={card.id} 
+        card.layout === "normal" ? 
+        card.image_uris.normal && <Image borderRadius={"1"} key={card.id} 
         src={card.image_uris.normal} 
+        alt={card.name} /> : <Image borderRadius={"1"} key={card.id} 
+        src={card.card_faces[0].image_uris.normal} 
         alt={card.name} />
       ))}
     </SimpleGrid>

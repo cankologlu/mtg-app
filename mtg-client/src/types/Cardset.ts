@@ -35,6 +35,7 @@ artist:string;
 artist_ids:[string];
 booster:boolean;
 border_color:string;
+card_faces?: FlipCard[];
 card_back_id:string;
 cmc:number;
 collector_number:string;
@@ -84,7 +85,7 @@ legalities:{  //legal || not_legal
   standard:string;
   vintage:string;}
 mana_cost:string; // string {4}{W}
-multiverse_ids:[number]
+multiverse_ids:number[];
 name:string;
 nonfoil:boolean;
 object:string;
@@ -127,3 +128,27 @@ type_line:string; //"Creature — Angel"
 uri:string;
 variation:boolean;
 }
+
+type FlipCard = {
+  artist: string;
+  artist_id: string;
+  colors: string[];
+  flavor_text: string;
+  illustration_id: string;
+  image_uris: {
+    art_crop: string;
+    border_crop: string;
+    large: string;
+    normal: string;
+    png: string;
+    small: string;
+  };
+  mana_cost: string;
+  name: string;
+  object: string;
+  oracle_text: string;
+  power?: string;
+  toughness?: string;
+  type_line: string;
+};
+
