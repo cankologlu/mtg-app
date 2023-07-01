@@ -10,20 +10,35 @@ export default function Sets() {
   console.log("setsData is:", setsData);
   return (
     <SimpleGrid p="10px" minChildWidth="250px" spacing="10px">
-      {setsData.data.map((card: Card) => (
-        card.layout === "normal" ? 
-        card.image_uris.normal && <Image borderRadius={"1"} key={card.id} 
-        src={card.image_uris.normal} 
-        alt={card.name} /> : <Image borderRadius={"1"} key={card.id} 
-        src={card.card_faces[0].image_uris.normal} 
-        alt={card.name} />
-      ))}
+      {setsData.data.map((card: Card) =>
+        card.layout === "transform" ||
+        "modal_dfc" ||
+        "meld" ||
+        "double_faced_token" ||
+        "reversible_card" ? (
+          <Image
+            borderRadius="1"
+            key={card.id}
+            src={card.card_faces?.[0].image_uris.normal}
+            alt={card.name}
+          />
+        ) : (
+          <Image
+            borderRadius="1"
+            key={card.id}
+            src={card.image_uris.normal}
+            alt={card.name}
+          />
+        )
+      )}
     </SimpleGrid>
   );
 }
 
-export const setsLoader: LoaderFunction = async({ params }: Params<string> ): Promise<any> => {
-  const { setsId }:string | any = params
+export const setsLoader: LoaderFunction = async ({
+  params,
+}: Params<string>): Promise<any> => {
+  const { setsId }: string | any = params;
   return axios
     .get(
       `https://api.scryfall.com/cards/search?include_extras=true&include_variations=true&order=set&q=e%3A${setsId}&unique=prints`
@@ -36,4 +51,4 @@ export const setsLoader: LoaderFunction = async({ params }: Params<string> ): Pr
       console.log(`Error is ${error}`);
       throw error;
     });
-}
+};
