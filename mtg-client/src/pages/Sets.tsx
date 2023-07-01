@@ -1,7 +1,7 @@
 import { SimpleGrid } from "@chakra-ui/layout";
 import axios from "axios";
 import React from "react";
-import { LoaderFunction, useLoaderData, Params } from "react-router";
+import { LoaderFunction, useLoaderData, Params, LoaderFunctionArgs } from "react-router";
 import { Image } from "@chakra-ui/react";
 import { SetsData, Card } from "../types/Cardset";
 
@@ -32,7 +32,7 @@ export default function Sets() {
 
 export const setsLoader: LoaderFunction = async ({
   params,
-}: Params<string>): Promise<any> => {
+}: LoaderFunctionArgs): Promise<any> => {
   const { setsId }: string | any = params;
   return axios
     .get(
