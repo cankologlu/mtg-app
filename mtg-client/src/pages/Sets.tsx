@@ -3,14 +3,15 @@ import axios from "axios";
 import React from "react";
 import { LoaderFunction, useLoaderData, Params } from "react-router";
 import { Image } from "@chakra-ui/react";
+import { SetsData, Card } from "../types/Cardset";
 
 export default function Sets() {
-  const setsData = useLoaderData();
+  const setsData = useLoaderData() as SetsData;
   console.log("setsData is:", setsData);
   return (
     <SimpleGrid p="10px" minChildWidth="250px" spacing="10px">
-      {setsData.data.map((card: any) => (
-        card.image_uris.normal && <Image key={card.id} 
+      {setsData.data.map((card: Card) => (
+        card.image_uris && card.image_uris.normal && <Image borderRadius={"1"} key={card.id} 
         src={card.image_uris.normal} 
         alt={card.name} />
       ))}
