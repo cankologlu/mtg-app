@@ -1,21 +1,8 @@
 import React, { useState } from "react";
 import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   List,
-  Heading,
   ListItem,
   Text,
-  Flex,
-  Skeleton,
-  SkeletonCircle,
-  SkeletonText,
 } from "@chakra-ui/react";
 import { Box, Button, Grid, GridItem, Image, Link } from "@chakra-ui/react";
 import { CardSet } from "../types/Cardset";
@@ -40,7 +27,7 @@ export default function SetsMenu(props: SetsMenuProps) {
     <Box
       position={"relative"}
       className="horse"
-      bg="#FAD7A0"
+      bg="blue.200"
       borderRadius={"l"}
       css={{
         "&::-webkit-scrollbar": {
