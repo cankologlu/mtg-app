@@ -6,6 +6,7 @@ import getAllSets from "../helpers/getAllSets";
 import { CardSet } from "../types/Cardset";
 import SetsMenu from "../components/SetsMenu"
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
+import Sidebar from "../components/Sidebar"
 
 
 
@@ -54,12 +55,13 @@ export default function RootLayout() {
       position={"relative"}
         as="aside"
         colSpan={{base: 6, lg: 1, xl: 1}}
-        bg="blackAlpha.200"
-        minHeight={{base:"25vh", lg: "100vh"}}
+        bg="blue.300"
+        minHeight={{lg: "100vh"}}
         paddingBottom={{base: "20px", lg: "30px"}}
         paddingLeft={{base: "20px", lg: "30px"}}
         paddingRight={{base: "20px", lg: "30px"}}
-      >
+        >
+        <Sidebar/>
       <Flex as="nav" mb={"10px"} alignContent={"center"}><Heading paddingTop={"10px"}>Sets here</Heading></Flex>
         <SetsMenu sets = {sets} />
       </GridItem>
