@@ -101,15 +101,16 @@ export default function RootLayout() {
           
         <GridItem
         alignItems={"center"}
-         colSpan={1}>
+         colSpan={1}
+         display={{ base: "block", md: "block", lg:"none", xl:"none" }}>
         <IconButton
         aria-label="Open Menu"
         size={"lg"}
         icon={<HamburgerIcon/>}
-        display={{ base: "block", md: "block", lg:"none" }}
+        display={{ base: "block", md: "block", lg:"none", xl:"none" }}
         onClick={() => changeDisplay("flex")}/>
         </GridItem>
-        <GridItem colSpan={5}>
+        <GridItem colSpan={6}>
         <Navbar />
         </GridItem>
         </Grid>
