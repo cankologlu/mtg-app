@@ -1,13 +1,21 @@
 import React from "react";
-import { Box, Flex, List, ListItem, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  InputLeftElement,
+  List,
+  ListItem,
+  Text,
+  Input,
+  InputGroup,
+} from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
-import { CalendarIcon } from "@chakra-ui/icons";
+import { SearchIcon } from "@chakra-ui/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGavel,
   faScroll,
   faBookOpenReader,
-  faMortarPestle,
   faPersonRays,
   faGopuram,
 } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +24,15 @@ import { customHoverStyles } from "../styles/styles";
 export default function Sidebar() {
   return (
     <List color="white" fontSize="1.2em" spacing={4} marginTop={10}>
+      <ListItem as={Box}>
+      <InputGroup>
+    <InputLeftElement pointerEvents='none'>
+      <SearchIcon color='gray.300' />
+    </InputLeftElement>
+    <Input type='Search' bg={"white.300"} placeholder='Card Search' _placeholder={{color:"gray.300"}}/>
+  </InputGroup>
+      </ListItem>
+
       <ListItem as={Box} {...customHoverStyles}>
         <NavLink to="/">
           <Flex alignItems={"center"}>

@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { AllSets, CardSet } from '../types/Cardset';
 
-export default function getAllSets(): Promise<AllSets> {
-  return axios.get(`https://api.scryfall.com/sets`)
+export default async function getAllSets(): Promise<AllSets> {
+   return axios.get(`https://api.scryfall.com/sets`)
   .then(response => {
     return response.data as AllSets;
   })

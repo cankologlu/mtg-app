@@ -4,7 +4,7 @@ import { Box, Button, Center, Flex, Grid, GridItem, Heading, Image, Link, IconBu
 import React, { useEffect, useState } from "react";
 import getAllSets from "../helpers/getAllSets";
 import { CardSet } from "../types/Cardset";
-import SetsMenu from "../components/SetsMenu"
+// import SetsMenu from "../components/SetsMenu"
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
 import Sidebar from "../components/Sidebar"
 
@@ -12,42 +12,10 @@ import Sidebar from "../components/Sidebar"
 
 export default function RootLayout() {
   const [display, changeDisplay] = useState("none")
-  const [sets, setSets] = useState<{
-    object: string;
-    has_more: boolean;
-    data: { [key: string]: CardSet[] };
-  }>({
-    object: "",
-    has_more: false,
-    data: {},
-  });
 
-  useEffect(() => {
-    getAllSets()
-      .then((data) => {
-        // Group the sets data by set_type
-        const groupedSets = data.data.reduce(
-          (acc: { [key: string]: CardSet[] }, set: CardSet) => {
-            const set_type = set.set_type;
-            if (acc[set_type]) {
-              acc[set_type].push(set);
-            } else {
-              acc[set_type] = [set];
-            }
-            return acc;
-          },
-          {}
-        );
-        // Update the state with the grouped sets data
-        setSets({
-          object: data.object,
-          has_more: data.has_more,
-          data: groupedSets,
-        });
-        
-      })
-      .catch((error) => console.log(`ERROR is ${error}`));
-  }, []);
+
+
+
   return (
     <Grid templateColumns="repeat(6, 1fr)">
       <GridItem 
@@ -62,8 +30,8 @@ export default function RootLayout() {
         paddingRight={{base: "20px", lg: "30px"}}
         >
         <Sidebar/>
-      <Flex as="nav" mb={"10px"} alignContent={"center"}><Heading paddingTop={"10px"}>Sets here</Heading></Flex>
-        <SetsMenu sets = {sets} />
+      {/* <Flex as="nav" mb={"10px"} alignContent={"center"}><Heading paddingTop={"10px"}>Sets here</Heading></Flex>
+        <SetsMenu sets = {sets} /> */}
       </GridItem>
       <GridItem as="main" colSpan={{base: 6, lg: 5, xl: 5}}>
         
@@ -94,8 +62,8 @@ export default function RootLayout() {
           icon={<CloseIcon/>}
           onClick={() => changeDisplay("none")}/>
         </Flex>
-      <Flex as="nav" mb={"10px"} alignContent={"center"}><Heading paddingTop={"10px"}>Sets here</Heading></Flex>
-        <SetsMenu sets = {sets} />
+      {/* <Flex as="nav" mb={"10px"} alignContent={"center"}><Heading paddingTop={"10px"}>Sets here</Heading></Flex>
+        <SetsMenu sets = {sets} /> */}
       </GridItem>
         <Grid templateColumns="repeat(6, 1fr)">
           
