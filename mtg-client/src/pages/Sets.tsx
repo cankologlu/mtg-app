@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Flex, HStack, List, ListItem, Text } from "@chakra-ui/react";
+import { Button, Flex, HStack, List, ListItem, Spacer, Text } from "@chakra-ui/react";
 import { Box, Grid, GridItem, Image, Link } from "@chakra-ui/react";
 import { CardSet } from "../types/Cardset";
 import { NavLink } from "react-router-dom";
 import getAllSets from "../helpers/getAllSets";
+import { customHoverStyles } from "../styles/styles";
 
 export default function Sets() {
   const [sets, setSets] = useState<{
@@ -84,14 +85,15 @@ export default function Sets() {
             as={Grid}
             key={set_type}
             w="auto"
-            fontSize="xl"
+            fontSize="3xl"
             p={4}
             fontWeight={600}
+            
           >
-            {`${
+            <Grid justifyContent={"center"} >{`${
               set_type[0][0].toUpperCase() +
               set_type.replace("_", " ").slice(1, set_type.length)
-            }`}
+            }`}</Grid>
             {sets.map((set: CardSet) => (
               <ListItem
                 display={"grid"}
@@ -101,9 +103,11 @@ export default function Sets() {
                 width={"auto"}
                 fontSize={"x-small"}
                 transform={"none"}
+                className="panda"
+                {...customHoverStyles}
               >
                 <NavLink to={`/cards/${set.code}`}>
-                  <Flex alignItems="center" justifyContent={"space-between"}>
+                  <Flex alignItems="center">
                     <Box m="12px">
                       <Image
                         fallbackSrc="https://www.seekpng.com/png/full/24-240917_unicorn-unicorns-emoji-emoji-horse-freetoedit-unicorn-emoji.png"
@@ -114,17 +118,13 @@ export default function Sets() {
                       />
                     </Box>
                     <Box>
-                      <Text>{set.name}</Text>
+                      <Text fontSize={"17px"}>{set.name}</Text>
                     </Box>
-                    <Flex>
-                      <Box ml="auto">
-                        <Text>{`${set.card_count} Cards`}</Text>
-                        </Box>
-                        <Box>
-                          <Text>{`Release Date: ${set.released_at}`}</Text>
-                        </Box>
-                    </Flex>
-                    </Flex>
+                    <Spacer/>
+                    <Text mr={10} fontSize={"15px"}>{`${set.card_count} Cards`}</Text>
+                    <Text fontSize={"15px"}>{`Release Date: ${set.released_at}`}</Text>
+                    <HStack></HStack>
+                  </Flex>
                 </NavLink>
               </ListItem>
             ))}
