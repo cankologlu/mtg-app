@@ -52,12 +52,6 @@ export default function Sets() {
       data: { [key: string]: CardSet[] };
     };
   };
-  // const { sets } = props;
-  console.log("sets are;", sets);
-  // const [isLoaded, setIsLoaded] = useState(false);
-  // const loaded = () => {
-  //   setIsLoaded(true)
-  // }
   return (
     <Box
       position={"relative"}

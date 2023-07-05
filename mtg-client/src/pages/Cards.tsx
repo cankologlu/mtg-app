@@ -1,18 +1,19 @@
+import React from "react";
 import { SimpleGrid } from "@chakra-ui/layout";
 import axios from "axios";
-import React from "react";
 import { LoaderFunction, useLoaderData, Params, LoaderFunctionArgs } from "react-router";
 import { Image } from "@chakra-ui/react";
 import { SetsData, Card } from "../types/Cardset";
+import { NavLink } from "react-router-dom";
 
 export default function Cards() {
   const cardsData = useLoaderData() as SetsData;
-  console.log("setsData is:", cardsData);
   return (
     <SimpleGrid p="10px" minChildWidth="250px" spacing="10px">
       {cardsData.data.map((card: Card) => (
+        <NavLink to={`/sets/${card.set}/card/${card.id}`}>
         <Image
-          borderRadius="1"
+          borderRadius="10px"
           key={card.id}
           src={
             card.layout === "transform" ||
@@ -25,6 +26,7 @@ export default function Cards() {
           }
           alt={card.name}
         />
+        </NavLink>
       ))}
     </SimpleGrid>
   );

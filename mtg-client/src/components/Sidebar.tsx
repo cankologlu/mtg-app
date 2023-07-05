@@ -29,7 +29,7 @@ export default function Sidebar() {
     <InputLeftElement pointerEvents='none'>
       <SearchIcon color='gray.300' />
     </InputLeftElement>
-    <Input type='Search' bg={"white.300"} placeholder='Card Search' _placeholder={{color:"gray.300"}}/>
+    <Input type='Search' bg={"white.300"} placeholder='Card Search' _placeholder={{color:"gray.300"}} fontSize={{ base: '10px', md: '10px', lg: '15px', xl:"18px" }}/>
   </InputGroup>
       </ListItem>
 
@@ -45,7 +45,7 @@ export default function Sidebar() {
       <ListItem as={Box} {...customHoverStyles}>
         <NavLink to="/profile">
           <Flex alignItems={"center"}>
-            <FontAwesomeIcon icon={faPersonRays} style={{ color: "#ffffff" }} />
+            <FontAwesomeIcon icon={faPersonRays} style={{ color: "#ffffff" }}  />
             <Text paddingLeft={3}>Profile</Text>
           </Flex>
         </NavLink>
