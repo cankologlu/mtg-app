@@ -1,5 +1,8 @@
-import React from "react"
+import React, { useEffect } from "react"
 
+useEffect(()=> {
+
+},[])
 
 const Card: React.FC = () => {
   return (
