@@ -5,16 +5,23 @@ import axios from "axios";
 import { error } from "console";
 import { Image } from "@chakra-ui/image";
 import { Box } from "@chakra-ui/layout";
+import { Card as CardType } from "../types/Cardset";
 
 
 
 const Card: React.FC = () => {
-  const cardData = useLoaderData();
+  const cardData = useLoaderData() as CardType;
   console.log("cardData is",cardData)
   return (
     <Box>
     <div>Card</div>
-    <Image src={cardData.image_uris.large}/>
+    <Image src={cardData.layout === "transform" ||
+            cardData.layout === "modal_dfc" ||
+            cardData.layout === "meld" ||
+            cardData.layout === "double_faced_token" ||
+            cardData.layout === "reversible_card"
+              ? cardData.card_faces?.[0].image_uris.large
+              : cardData.image_uris.large}/>
     </Box>
   );
 }
