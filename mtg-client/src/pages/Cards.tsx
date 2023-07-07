@@ -6,7 +6,7 @@ import { Image } from "@chakra-ui/react";
 import { SetsData, Card } from "../types/Cardset";
 import { NavLink } from "react-router-dom";
 
-export default function Cards() {
+export default function Cards(props:any) {
   const cardsData = useLoaderData() as SetsData;
   return (
     <SimpleGrid p="10px" minChildWidth="250px" spacing="10px">
@@ -36,6 +36,7 @@ export const cardsLoader: LoaderFunction = async ({
   params,
 }: LoaderFunctionArgs): Promise<any> => {
   const { setsId }: string | any = params;
+  console.log("params are:", params)
   return axios
     .get(
       `https://api.scryfall.com/cards/search?include_extras=true&include_variations=true&order=set&q=e%3A${setsId}&unique=prints`
