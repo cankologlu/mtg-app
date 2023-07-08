@@ -100,7 +100,7 @@ export default function Sets() {
                 className="panda"
                 {...customHoverStyles}
               >
-                <NavLink to={`/cards/${set.code}`}>
+                <NavLink to={`/sets/${set.code}/cards`}>
                   <Flex alignItems="center">
                     <Box m="12px">
                       <Image
