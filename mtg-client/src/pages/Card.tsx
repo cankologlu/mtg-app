@@ -20,7 +20,7 @@ const Card: React.FC = () => {
             cardData.layout === "meld" ||
             cardData.layout === "double_faced_token" ||
             cardData.layout === "reversible_card"
-              ? cardData.card_faces?.[0].image_uris.large
+              ? cardData.card_faces?.[0].image_uris.normal
               : cardData.image_uris.large}/>
     </Box>
   );
